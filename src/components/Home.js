@@ -13,7 +13,7 @@ const Home = () => {
     try {
       const token = localStorage.getItem("token");
 
-      const res = await fetch("http://localhost:5000/getdata", {
+      const res = await fetch("https://invoicerr-backend.onrender.com/getdata", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

@@ -40,7 +40,7 @@ const InvoicePDF = () => {
     const fetchLatestInvoiceNumber = async () => {
       const token = localStorage.getItem("token")
       try {
-        const response = await fetch("http://localhost:5000/get-latest-invoice-number", {
+        const response = await fetch("https://invoicerr-backend.onrender.com/get-latest-invoice-number", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -80,7 +80,7 @@ const InvoicePDF = () => {
 
       // POST request to  backend API endpoint
 const token = localStorage.getItem("token")
-      const response = await fetch("http://localhost:5000/send-data-to-backend", {
+      const response = await fetch("https://invoicerr-backend.onrender.com/send-data-to-backend", {
         
         method: "POST",
         headers: {
