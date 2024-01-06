@@ -1,40 +1,24 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { userContext } from "../App";
+import { useAuth } from "../auth";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Logout = () => {
+  const navigate = useNavigate();
+  const { LogoutUser } = useAuth();
 
-    const {state, dispatch} = useContext(userContext);
+  useEffect(() => {
+    const logoutAndRedirect = async () => {
+      await LogoutUser();
+      toast.success("Logged out: see you soon")
+      navigate("/login"); 
+    };
 
-    const Navigate = useNavigate();
-    useEffect(() => {
+    logoutAndRedirect();
+  }, [LogoutUser, navigate]);
 
-        
-        fetch('https://invoicerr-backend.onrender.com/logout', {
-            method: 'GET',
-            headers: {
-                Accept: "Application/json",
-                "Content-TYpe": "Application/json"
-            },
-            credentials: "include"
-        }).then((res) => {
-            dispatch({type:"USER", payload:false});
-            Navigate('/login', {replace: true});
-            window.alert("Logged out")
-            if(!res.status === 200){
-                const error = new Error (res.error);
-                throw error
-            }
-        }).catch((err) => {
-            console.log(err)
-        })
-
-    })
-    return(
-        <>
-
-        </>
-    );
-}
+  return null; // Return null or any other content you need for the component
+};
 
 export default Logout;

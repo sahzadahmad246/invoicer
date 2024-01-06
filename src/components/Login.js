@@ -1,12 +1,13 @@
 import React, { useContext, useState, useEffect } from "react";
 import "./Login.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../auth";
 import LoginImg from "../images/login.png";
 import { userContext } from "../App";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-import context from "react-bootstrap/esm/AccordionContext";
 import Loader from "./Loader";
 const Login = () => {
   const { state, dispatch } = useContext(userContext);
@@ -15,7 +16,8 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [updateMessage, setUpdateMessage] = useState(null);
-  const { storeDataInLS } = useAuth();
+  const { storeDataInLS, setIsLoggedIn } = useAuth();
+ 
 
   useEffect(() => {
     if (updateMessage) {
@@ -32,7 +34,7 @@ const Login = () => {
     console.log(email, password);
     try {
       setLoading(true);
-      const res = await fetch("https://invoicerr-backend.onrender.com/signin", {
+      const res = await fetch("http://localhost:5000/signin", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -49,14 +51,14 @@ const Login = () => {
       localStorage.setItem("token", data.token);
 
       if (res.status === 400) {
-        setUpdateMessage("Login Failed: Invalid credentials");
+        // setUpdateMessage();
+        toast.error("Login Failed: Invalid credentials");
       } else if (res.status === 500) {
-        // window.alert("Login Failed: Server error");
-        setUpdateMessage("Login Failed: Server error");
+        toast.error("Login Failed: Server error");
       } else if (res.status === 201) {
-        dispatch({ type: "USER", payload: true });
-        
-        setUpdateMessage("Details updated successfully.");
+        // dispatch({ type: "USER", payload: true });
+        setIsLoggedIn(true)
+        toast.success("Login success");
         Navigate("/");
       }
     } catch (error) {
@@ -71,16 +73,7 @@ const Login = () => {
     <>
       <section className="login-box">
         <div className="login-container container">
-          {updateMessage && (
-            <div
-              className={`update-message ${
-                updateMessage.includes("failed") ? "error" : "success"
-              }`}
-              role="alert"
-            >
-              {updateMessage}
-            </div>
-          )}
+         
           <div className="login-left">
             <div className="login-img container">
               {" "}
