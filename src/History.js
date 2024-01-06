@@ -23,7 +23,7 @@ const History = () => {
       
       return;
     }
-    fetch("http://localhost:5000/get-invoice-data", {
+    fetch("https://invoicerr-backend.onrender.com/get-invoice-data", {
       headers: {
         Authorization: `Bearer ${token}`
       }
