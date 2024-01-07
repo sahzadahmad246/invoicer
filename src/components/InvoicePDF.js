@@ -80,7 +80,7 @@ const InvoicePDF = () => {
 
       // POST request to  backend API endpoint
 const token = localStorage.getItem("token")
-      const response = await fetch("https://invoicerr-backend.onrender.com/send-data-to-backend", {
+      const response = await fetch("http://localhost:5000/send-data-to-backend", {
         
         method: "POST",
         headers: {
