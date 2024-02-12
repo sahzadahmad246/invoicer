@@ -38,15 +38,18 @@ const InvoicePDF = () => {
   useEffect(() => {
     // Fetching the latest invoice number from the database
     const fetchLatestInvoiceNumber = async () => {
-      const token = localStorage.getItem("token")
+      const token = localStorage.getItem("token");
       try {
-        const response = await fetch("https://invoicerr-backend.onrender.com/get-latest-invoice-number", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await fetch(
+          "https://invoicerr-backend.onrender.com/get-latest-invoice-number",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
         if (response.status === 200) {
           const data = await response.json();
@@ -79,21 +82,22 @@ const InvoicePDF = () => {
       };
 
       // POST request to  backend API endpoint
-const token = localStorage.getItem("token")
-      const response = await fetch("https://invoicerr-backend.onrender.com/send-data-to-backend", {
-        
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(dataToSend),
-      });
+      const token = localStorage.getItem("token");
+      const response = await fetch(
+        "http://localhost:5000/send-data-to-backend",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(dataToSend),
+        }
+      );
 
       if (response.status === 200) {
         setAlert("Invoice saved successfully");
 
-        
         setInvoiceNumber((prevNumber) => prevNumber + 1);
       } else {
         setAlert("Failed to save invoice. Please try again.");
@@ -114,17 +118,19 @@ const token = localStorage.getItem("token")
   }, [alertMessage]);
 
   const callProductPage = async () => {
-    const token = localStorage.getItem("token")
+    const token = localStorage.getItem("token");
     try {
-      const res = await fetch("https://invoicerr-backend.onrender.com/product", {
-        method: "GET",
-        headers: {
-          
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        credentials: "include",
-      });
+      const res = await fetch(
+        "https://invoicerr-backend.onrender.com/product",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          credentials: "include",
+        }
+      );
 
       const data = await res.json();
       setUserData(data);
@@ -156,7 +162,7 @@ const token = localStorage.getItem("token")
     (total, product) => total + (product.price - 0.18 * product.price),
     0
   );
-  
+
   let discountSymbol = "";
   let discountAmount = discountValue;
 
@@ -178,12 +184,10 @@ const token = localStorage.getItem("token")
   // Initializing gstAmount to 0 by default
   let gstAmount = 0;
 
-  
   state.selectedProducts.forEach((product) => {
     const calculatedGST = product.price * 0.09;
 
     if (typeof calculatedGST === "number" && !isNaN(calculatedGST)) {
-     
       gstAmount += calculatedGST;
     }
   });
@@ -206,7 +210,6 @@ const token = localStorage.getItem("token")
     capitalizeFirstLetter(totalAmountInWords);
 
   const saveAndPrint = () => {
-    
     printPDF();
     sendDataToBackend();
   };
@@ -271,7 +274,8 @@ const token = localStorage.getItem("token")
             <div className=" customer-data">
               <div>
                 <span className="fw-bold">Date and Time:</span>{" "}
-                {formatDate(currentDateTime)}
+                {/* <span> {formatDate(currentDateTime)}</span> */}
+                Dec 10, 2023, 05:16 PM
               </div>
               <div>
                 <span className="fw-bold">Invoice No :</span> {invoiceNumber}
@@ -293,8 +297,8 @@ const token = localStorage.getItem("token")
           {state.selectedProducts.map((product) => {
             const originalPrice = product.price;
             const imei = product.imei;
-            const discount = Math.round(0.18 * originalPrice); 
-            const priceBeforeTax = Math.round(originalPrice - discount); 
+            const discount = Math.round(0.18 * originalPrice);
+            const priceBeforeTax = Math.round(originalPrice - discount);
 
             return (
               <div className="tableRow " key={product._id}>
