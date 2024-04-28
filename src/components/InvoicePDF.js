@@ -345,7 +345,7 @@ const InvoicePDF = () => {
               <div className="description text-start">
                 GSTIN: {userData.gst}
               </div>
-            //  <div className="quantity ">CGST</div>
+              <div className="quantity ">CGST</div>
               <div className="rate ">0</div>
               <div className="amount ">0</div>
             </div>
