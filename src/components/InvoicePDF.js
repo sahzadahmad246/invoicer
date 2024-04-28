@@ -337,17 +337,17 @@ const InvoicePDF = () => {
               <div className="description text-start">
                 Payment Type: {state.paymentMode}
               </div>
-              <div className="quantity ">SGST</div>
-              <div className="rate  p-2">9%</div>
-              <div className="amount ">{gstAmount}</div>
+             <div className="quantity ">SGST</div>
+              <div className="rate  p-2">0</div>
+              <div className="amount ">0</div>
             </div>
             <div className="footer tableRow">
               <div className="description text-start">
                 GSTIN: {userData.gst}
               </div>
-              <div className="quantity ">CGST</div>
-              <div className="rate ">9%</div>
-              <div className="amount ">{gstAmount}</div>
+            //  <div className="quantity ">CGST</div>
+              <div className="rate ">0</div>
+              <div className="amount ">0</div>
             </div>
             <div className="footer tableRow">
               <div className="description text-start ">
