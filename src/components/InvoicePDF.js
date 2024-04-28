@@ -320,7 +320,7 @@ const InvoicePDF = () => {
               <div className="description payment-mode "></div>
               <div className="quantity ">Subtotal</div>
               <div className="rate ">-</div>
-              <div className="amount ">{totalAmountBeforeTax}</div>
+              <div className="amount ">2500</div>
             </div>
             <div className="footer tableRow">
               <div className="description payment-mode "></div>
