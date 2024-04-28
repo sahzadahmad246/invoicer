@@ -275,7 +275,7 @@ const InvoicePDF = () => {
               <div>
                 <span className="fw-bold">Date and Time:</span>{" "}
                 {/* <span> {formatDate(currentDateTime)}</span> */}
-                Dec 10, 2023, 05:16 PM
+                Apr 28, 2024, 11:06 AM
               </div>
               <div>
                 <span className="fw-bold">Invoice No :</span> {invoiceNumber}
@@ -309,8 +309,8 @@ const InvoicePDF = () => {
                   <div className="imei-in-invoice p-0 m-0">{imei}</div>
                 </div>
                 <div className="quantity">1</div>
-                <div className="rate">{priceBeforeTax}</div>
-                <div className="amount">{priceBeforeTax}</div>
+                <div className="rate">2500</div>
+                <div className="amount">2500</div>
               </div>
             );
           })}
